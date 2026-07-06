@@ -66,3 +66,10 @@ necessário para rodar o app em produção.
 - Esta ferramenta é um instrumento de apoio à decisão clínica e não
   substitui avaliação, diagnóstico ou julgamento de profissional de saúde
   qualificado.
+- O documento original apresenta o roteiro da consulta de seguimento como
+  fluxograma (caixas e setas); a extração de texto do PDF linearizou esse
+  layout. As perguntas e exemplos de cada item foram conferidos
+  literalmente contra o PDF; a lógica de encadeamento entre eles (ordem
+  das perguntas condicionais) foi revisada item a item, mas recomenda-se
+  que um profissional confira o roteiro de cada item em risco contra o
+  PDF original (`assets/`) durante a consulta de seguimento.
