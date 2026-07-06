@@ -181,16 +181,20 @@ MCHAT_ITEMS: tuple[MchatItem, ...] = (
                 "interessante para você, ele aponta com o dedo?"
             ),
             steps=(
-                "Se \"Sim\": peça um exemplo (um avião no céu? um caminhão na rua? um bicho no "
-                "chão? um animal no quintal?) e pergunte se ele aponta para mostrar interesse ou "
-                "só para pedir ajuda.",
+                "Se \"Sim\": peça um exemplo de algo que ele possa apontar para mostrar para "
+                "você (se o genitor não der exemplo, perguntar os do ramo \"Não\" abaixo).",
                 "Se \"Não\": pergunte se o seu filho alguma vez já quis que você olhasse para "
-                "algo interessante, usando os mesmos exemplos.",
+                "algo interessante como: um avião no céu? um caminhão na rua? um bicho no chão? "
+                "um animal no quintal? Se \"Não\" para todos, FALHOU. Se \"Sim\" para qualquer "
+                "um, pergunte: como é que seu filho chama sua atenção para ele? Ele aponta com "
+                "o dedo?",
+                "Em ambos os ramos, uma vez confirmado que ele aponta para mostrar algo, "
+                "pergunte: ele aponta para mostrar o interesse dele/dela ou para pedir ajuda?",
             ),
             scoring_note=(
-                "PASSOU se ele aponta (mesmo que às vezes também para pedir ajuda) para "
-                "mostrar interesse em algo; FALHOU se aponta somente para pedir ajuda, ou se "
-                "\"Não\" para todos os exemplos."
+                "PASSOU se ele aponta para mostrar interesse (mesmo que também aponte às vezes "
+                "para pedir ajuda); FALHOU se ele aponta somente para pedir ajuda, ou se \"Não\" "
+                "para todos os exemplos do ramo \"Não\"."
             ),
         ),
     ),
@@ -303,7 +307,7 @@ MCHAT_ITEMS: tuple[MchatItem, ...] = (
                 "\"Sim\" para dois ou mais, pergunte como ele reage:",
                 "Respostas de PASSOU: tampa os ouvidos calmamente? diz a você que não gosta de "
                 "barulho?",
-                "Respostas de FALHOU: grita? chora? tampa os ouvidos de forma aflita?",
+                "Respostas de FALHOU: grita? chora? tampa os ouvidos?",
                 "Se houver respostas de ambos os tipos, pergunte qual ele faz mais frequentemente.",
             ),
             scoring_note="PASSOU se reagir a menos de dois sons, ou se a reação predominante for calma; FALHOU se reagir a dois ou mais sons com reação predominantemente aflita.",
@@ -411,18 +415,29 @@ MCHAT_ITEMS: tuple[MchatItem, ...] = (
         risk_answer="Não",
         is_reverse_scored=False,
         followup=FollowUpGuidance(
-            intro="Por favor, dê um exemplo de como ele compreendeu você.",
-            steps=(
-                "Se o exemplo não indicar que a criança compreende uma ordem simples sem "
-                "sinais não-verbais, pergunte (até obter um \"Sim\" ou usar todos os exemplos): "
-                "se você diz \"Me mostre o seu sapato\" sem apontar, gestos ou sugestões, ele "
-                "mostra o sapato? se você diz \"Me traz o cobertor\" sem apontar, gestos ou "
-                "sugestões, ele traz para você? se você diz \"Põe o livro na cadeira\" sem "
-                "apontar, gestos ou sugestões, ele coloca o livro na cadeira?",
-                "Se \"Não\" para todas, pergunte: se é hora do jantar e a comida está na mesa, "
-                "e você diz ao seu filho para se sentar, ele se senta à mesa?",
+            intro=(
+                "Por favor, dê um exemplo de como ele compreendeu você. Quando ele/ela tem uma "
+                "dica situacional, ele consegue seguir a ordem? Por exemplo, quando você está "
+                "vestido para sair e diz a ele para pegar o seu sapato, ele entende?"
             ),
-            scoring_note="PASSOU se \"Sim\" para qualquer exemplo (com ou sem dica situacional); FALHOU se \"Não\" para todos.",
+            steps=(
+                "Se o exemplo indicar que a criança compreende uma ordem simples mesmo sem "
+                "sinais não-verbais (sem apontar/gestos), considere PASSOU diretamente.",
+                "Se o exemplo NÃO indicar isso (ou envolver apenas dicas situacionais/gestos), "
+                "pergunte (até obter um \"Sim\" ou usar todos os exemplos): se você diz \"Me "
+                "mostre o seu sapato\" sem apontar, gestos ou sugestões, ele mostra o sapato? "
+                "se você diz \"Me traz o cobertor\" sem apontar, gestos ou sugestões, ele traz "
+                "para você? se você diz \"Põe o livro na cadeira\" sem apontar, gestos ou "
+                "sugestões, ele coloca o livro na cadeira?",
+                "Se \"Não\" para todas essas três, pergunte: se é hora do jantar e a comida está "
+                "na mesa, e você diz ao seu filho para se sentar, ele se senta à mesa (sem outra "
+                "dica além da situação)?",
+            ),
+            scoring_note=(
+                "PASSOU se o exemplo já indicar compreensão sem dicas não-verbais, OU se "
+                "\"Sim\" para qualquer uma das perguntas seguintes; FALHOU se \"Não\" para "
+                "todas."
+            ),
         ),
     ),
     MchatItem(
@@ -457,9 +472,9 @@ MCHAT_ITEMS: tuple[MchatItem, ...] = (
         followup=FollowUpGuidance(
             intro="Ele gosta quando alguém o faz pular ou balançar?",
             steps=(
-                "Quando você balança ou joga ele para o alto, como ele reage? ri ou dá "
-                "gargalhadas? fala ou emite algum som? pede mais, esticando os braços? outro "
-                "(descrever)?",
+                "Independentemente da resposta acima, pergunte: quando você balança ou joga "
+                "ele para o alto, como ele reage? ri ou dá gargalhadas? fala ou emite algum "
+                "som? pede mais, esticando os braços? outro (descrever)?",
             ),
             scoring_note="PASSOU se \"Sim\" para qualquer exemplo específico (ou se \"outro\" for uma resposta positiva); FALHOU se \"Não\" para todos.",
         ),
